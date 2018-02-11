@@ -1,3 +1,7 @@
+import itertools
+
+
+
 def write(out, geom):
 	# Generate the header
 	out.write(' 999\n')
@@ -37,13 +41,12 @@ def write(out, geom):
 	out.write('ENDSEC\n')
 
 	# For each ring
-	ring_list = [geom.exterior] + list(geom.interiors)
 	out.write(' 0\n')
 	out.write('SECTION\n')
 	out.write(' 2\n')
 	out.write('ENTITIES\n')
 
-	for ring in ring_list:
+	for ring in itertools.chain.from_iterable([[geom.exterior], geom.interiors]):
 		for vertex_pair in zip(ring.coords[:-1], ring.coords[1:]):
 			out.write(' 0\n')
 			out.write('LINE\n')
