@@ -44,7 +44,6 @@ def write(out, geom):
 	out.write('ENTITIES\n')
 
 	for ring in ring_list:
-		coords = ring.coords
 		for vertex_pair in zip(ring.coords[:-1], ring.coords[1:]):
 			out.write(' 0\n')
 			out.write('LINE\n')
