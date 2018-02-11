@@ -29,13 +29,13 @@ def deg2rad(x):
 
 
 
-def generate(tooth_count = 8,
+def generate(teeth_count = 8,
              tooth_width = 1.,
              pressure_angle = deg2rad(20.),
              backlash = 0.,
              frame_count = 16):
 	tooth_width -= backlash
-	pitch_circumference = tooth_width * 2 * tooth_count
+	pitch_circumference = tooth_width * 2 * teeth_count
 	pitch_radius = pitch_circumference / (2 * numpy.pi)
 	addendum = tooth_width * (2 / numpy.pi)
 	dedendum = addendum
@@ -71,8 +71,8 @@ def generate(tooth_count = 8,
 
 	# Generate the full gear
 	gear_poly = Point(0., 0.).buffer(outer_radius)
-	for i in range(0, tooth_count):
-		gear_poly = rotate(gear_poly.difference(tooth_poly), (2 * numpy.pi) / tooth_count, Point(0., 0.), use_radians = True)
+	for i in range(0, teeth_count):
+		gear_poly = rotate(gear_poly.difference(tooth_poly), (2 * numpy.pi) / teeth_count, Point(0., 0.), use_radians = True)
 	
 	# Job done
 	return gear_poly, pitch_radius
@@ -82,7 +82,7 @@ def generate(tooth_count = 8,
 def main():
 	# Command line parsing
 	parser = argparse.ArgumentParser(description = 'Generate 2d spur gears profiles')
-	parser.add_argument('-t', '--tooth-count', type = int, default = 17, help = 'Tooth count')
+	parser.add_argument('-t', '--teeth-count', type = int, default = 17, help = 'Teeth count')
 	parser.add_argument('-w', '--tooth-width', type = float, default = 10., help = 'Tooth width')
 	parser.add_argument('-p', '--pressure-angle', type = float, default = 20., help = 'Pressure angle in degrees')
 	parser.add_argument('-n', '--frame-count', type = int, default = 16, help = 'Number of frames used to build the involute')
@@ -91,12 +91,12 @@ def main():
 	args = parser.parse_args()
 
 	# Input parameters safety checks
-	if args.tooth_count <= 0:
+	if args.teeth_count <= 0:
 		sys.stderr.write('Invalid teeth count\n')
 		sys.exit(1)
 
 	# Generate the shape
-	poly, pitch_radius = generate(args.tooth_count,
+	poly, pitch_radius = generate(args.teeth_count,
 	                              args.tooth_width,
 	                              deg2rad(args.pressure_angle),
 	                              args.backlash,
