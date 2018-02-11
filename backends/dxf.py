@@ -5,7 +5,7 @@ import itertools
 def write(out, geom):
 	# Generate the header
 	out.write(' 999\n')
-	out.write('DXF created from shape-to-dxf\n')
+	out.write('DXF created from gear.py (https://github.com/marmakoide/gear-profile-generator)\n')
 	out.write(' 0\n')
 	out.write('SECTION\n')
 	out.write(' 2\n')
