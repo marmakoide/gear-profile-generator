@@ -2,7 +2,9 @@ import sys
 import numpy
 import argparse
 import itertools
+
 import backends.dxf
+import backends.text
 
 from shapely.ops import cascaded_union
 from shapely.geometry import Point, MultiPoint, Polygon, box
@@ -82,12 +84,13 @@ def generate(teeth_count = 8,
 def main():
 	# Command line parsing
 	parser = argparse.ArgumentParser(description = 'Generate 2d spur gears profiles')
-	parser.add_argument('-t', '--teeth-count', type = int, default = 17, help = 'Teeth count')
+	parser.add_argument('-c', '--teeth-count', type = int, default = 17, help = 'Teeth count')
 	parser.add_argument('-w', '--tooth-width', type = float, default = 10., help = 'Tooth width')
 	parser.add_argument('-p', '--pressure-angle', type = float, default = 20., help = 'Pressure angle in degrees')
 	parser.add_argument('-n', '--frame-count', type = int, default = 16, help = 'Number of frames used to build the involute')
 	parser.add_argument('-b', '--backlash', type = float, default = 0.2, help = 'Backlash')
-	parser.add_argument('-o', '--output-path', default = 'out.dxf', help = 'Output file')
+	parser.add_argument('-t', '--output-type', choices = ['dxf', 'text'], default = 'dxf', help = 'Output type')
+	parser.add_argument('-o', '--output-path', default = 'out', help = 'Output file')
 	args = parser.parse_args()
 
 	# Input parameters safety checks
@@ -102,10 +105,14 @@ def main():
 	                              args.backlash,
 	                              args.frame_count)
 
-	# Save the shape
+	# Write the shape to the output
 	print 'pitch radius =', pitch_radius
+
 	with open(args.output_path, 'w') as f:
-		backends.dxf.write(f, poly)
+		if args.output_type == 'dxf':
+			backends.dxf.write(f, poly)
+		elif args.output_type == 'text':
+			backends.text.write(f, poly)
 
 
 
