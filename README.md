@@ -10,7 +10,7 @@ rocket, and that rocket blows up due to a faulty gear design, I take no
 responsability.
 
 The implementation is based on a method explained on the excellent Michal 
-Zalewski's[Guerrila Guide of CNC Machining](http://lcamtuf.coredump.cx/gcnc),
+Zalewski's [Guerrila Guide of CNC Machining](http://lcamtuf.coredump.cx/gcnc),
 [chapter 6](http://lcamtuf.coredump.cx/gcnc/ch6).
 
 ## Getting Started
@@ -28,6 +28,10 @@ You will need
 
 The script generates a file from the gear parameters specified from the command-line
 
+```
+python gear.py --teeth-count=17 --tooth-width=0.25 --pressure-angle=20 --backlash=0.1 -tdxf -oout.dxf
+```
+
 This command will generate a spur gear with 
 
 * 17 teeth
@@ -35,10 +39,10 @@ This command will generate a spur gear with
 * a backlash of 0.1
 
 and it will be saved as a DXF file named *out.dxf*.
- 
-```
-python gear.py --teeth-count=17 --tooth-width=0.25 --pressure-angle=20 --backlash=0.1 -tdxf -oout.dxf
-```
+
+If you generate an inner gear, to design a planetary gearbox for instance, use
+a negative backlash. The text output is just the raw coordinates of the multiline
+defining the gear's shape.
 
 ## Authors
 
