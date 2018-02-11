@@ -1,3 +1,4 @@
+import sys
 import numpy
 import argparse
 import itertools
@@ -88,6 +89,11 @@ def main():
 	parser.add_argument('-b', '--backlash', type = float, default = 0.2, help = 'Backlash')
 	parser.add_argument('-o', '--output-path', default = 'out.dxf', help = 'Output file')
 	args = parser.parse_args()
+
+	# Input parameters safety checks
+	if args.tooth_count <= 0:
+		sys.stderr.write('Invalid teeth count\n')
+		sys.exit(1)
 
 	# Generate the shape
 	poly, pitch_radius = generate(args.tooth_count,
