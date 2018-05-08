@@ -3,6 +3,8 @@
 This script generates spur gear profiles (or outlines). It gives a correct output
 even for low numbers of teeth. 
 
+![thumbnail](https://raw.githubusercontent.com/marmakoide/gear-profile-generator/master/thumbnail.png)
+
 The gears generated with this script have been 3d printed and worked fine. 
 However, I am no mechanical engineer, I'm a guy who code late in the evening
 while having a beer. If you use this script to design a suborbital passenger 
