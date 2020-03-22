@@ -42,7 +42,7 @@ def generate(teeth_count = 8,
 	addendum = tooth_width * (2 / numpy.pi)
 	dedendum = addendum
 	outer_radius = pitch_radius + addendum
-	print pitch_radius - dedendum
+	print (pitch_radius - dedendum)
 	# Tooth profile
 	profile = numpy.array([
   	[-(.5 * tooth_width + addendum * numpy.tan(pressure_angle)),  addendum],
@@ -106,7 +106,7 @@ def main():
 	                              args.frame_count)
 
 	# Write the shape to the output
-	print 'pitch radius =', pitch_radius
+	print ('pitch radius =', pitch_radius)
 
 	with open(args.output_path, 'w') as f:
 		if args.output_type == 'dxf':
